@@ -5,10 +5,41 @@ import ProjectModal from '../components/ProjectModal';
 
 const projects = [
     {
+        title: "BLE Sensor Node, nRF52840 / nRF5340 with Zephyr",
+        description: "A Bluetooth Low Energy sensor node on Zephyr (nRF Connect SDK) that streams temperature, humidity, pressure, and motion data to a phone, with my own out-of-tree accelerometer driver and signed over-the-air updates.",
+        tech: ["Embedded C", "Zephyr RTOS", "nRF Connect SDK", "nRF52840", "nRF5340", "Bluetooth LE", "MCUboot", "ztest"],
+        links: { github: "https://github.com/Raguram-Kasthurisamy/nrf-zephyr-ble-sensor-node", external: "#" },
+        type: "embedded",
+        timeline: "Nov 2026",
+        details: [
+            "Developed a Bluetooth Low Energy sensor node on the nRF52840 and nRF5340 with Zephyr (nRF Connect SDK), streaming temperature, humidity, pressure, and motion data to a phone.",
+            "Wrote an out-of-tree Zephyr sensor driver for ST's LIS2DH12 accelerometer over SPI, with a devicetree binding, Kconfig options, the Zephyr sensor API, and an interrupt-driven data-ready trigger that hands the bus read to a work queue.",
+            "Integrated a BME280 environmental sensor over I2C through devicetree, with modules exchanging data on a zbus channel, an explicit application state machine, and a task watchdog.",
+            "Implemented a custom GATT service secured with LE Secure Connections passkey pairing and bonding, plus signed over-the-air updates with MCUboot and MCUmgr that roll back automatically if a new image fails its self-test.",
+            "Tested the packet format, state machine, and driver math with ztest unit tests on native_sim under Twister, with CI builds for both boards and a low-power variant."
+        ]
+    },
+    {
+        title: "FreeRTOS Smart-Actuator ECU, STM32U575",
+        description: "A FreeRTOS motor-control ECU in C++20 on an STM32U575 (Cortex-M33) that holds a commanded motor speed, takes commands over CAN, and is designed to fail safe.",
+        tech: ["C++20", "FreeRTOS", "STM32U575", "Cortex-M33", "CAN (FDCAN)", "PID Control", "GoogleTest", "CMake"],
+        links: { github: "https://github.com/Raguram-Kasthurisamy/stm32u5-freertos-motor-ecu", external: "#" },
+        type: "embedded",
+        timeline: "Oct 2026",
+        details: [
+            "Developed a FreeRTOS motor-control ECU on an STM32U575 (Cortex-M33) in C++20, with six statically allocated tasks and a 1 kHz control loop woken by a timer interrupt.",
+            "Implemented closed-loop DC motor speed control with PWM drive through an H-bridge, quadrature encoder feedback, and a PID controller with feedforward, anti-windup, and setpoint ramping.",
+            "Sampled motor current with timer-triggered ADC conversions and circular GPDMA, synchronized to the 20 kHz PWM period with no per-sample CPU interrupts.",
+            "Implemented a 500 kbit/s CAN node on FDCAN with a DBC-defined message set, CRC-8 and alive-counter checks, a 250 ms command timeout, and bus-off recovery.",
+            "Built in fail-safe behavior with a supervisor task and independent watchdog, a hardware overcurrent cut-off through the timer break input, stack-overflow detection, and CPU fault capture that survives reset into a flash fault log.",
+            "Tested the control, CAN-protocol, and safety logic with 97 GoogleTest host unit tests under ASan and UBSan, including closed-loop tests against a simulated DC motor, in GitHub Actions CI."
+        ]
+    },
+    {
         title: "Bare-Metal UART Driver Study, STM32U575",
         description: "Designed, implemented, and benchmarked three bare-metal USART drivers (polling, interrupt-driven, and DMA-based) on a Cortex-M33 to study how data-transfer strategy affects CPU load and data integrity.",
         tech: ["Embedded C", "STM32U575", "Cortex-M33", "USART", "GPDMA", "Bare-Metal"],
-        links: { github: "https://github.com/Ragu-programmer/Device-Driver-Development-STM32-MCU", external: "#" },
+        links: { github: "https://github.com/Raguram-Kasthurisamy/Device-Driver-Development-STM32-MCU", external: "#" },
         type: "embedded",
         timeline: "Sept 2026 - Oct 2026",
         details: [
@@ -23,7 +54,7 @@ const projects = [
         title: "STM32-based Robot Actuator Controller",
         description: "Built an STM32F446RE gripper controller with PWM drive, quadrature encoders, UART commands, and interrupt-based position updates.",
         tech: ["Embedded C", "STM32F446RE", "PWM", "Quadrature Encoder", "UART", "PD Control"],
-        links: { github: "https://github.com/Ragu-programmer/STM-32_Motor_Controller", external: "#" },
+        links: { github: "https://github.com/Raguram-Kasthurisamy/STM-32_Motor_Controller", external: "#" },
         type: "embedded",
         timeline: "Jun 2023 - Dec 2023",
         details: [
@@ -36,7 +67,7 @@ const projects = [
         title: "Custom STM32 Bootloader",
         description: "An STM32 bootloader for in-field firmware updates over UART/SPI, with a packet-based transfer protocol, CRC validation, and fault-tolerant recovery to prevent bricking.",
         tech: ["Embedded C", "C++", "STM32", "UART", "SPI", "CRC", "Qt"],
-        links: { github: "https://github.com/Ragu-programmer/Custom-Bootloader-for-STM-32-MCU", external: "#" },
+        links: { github: "#", external: "#" },
         type: "embedded",
         timeline: "May 2023 - Oct 2023",
         details: [
